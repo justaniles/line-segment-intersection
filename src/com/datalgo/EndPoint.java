@@ -1,4 +1,4 @@
-public class EndPoint {
+public class EndPoint implements Comparator {
 	private int xCoord;
 	private int yCoord;
 	
@@ -14,5 +14,6 @@ public class EndPoint {
 	public int y() {
 		return yCoord;
 	}
+	
 	
 }

@@ -12,6 +12,7 @@ public class Main {
     
     
     public Line[] genLines(int n) {
+    	System.out.println("PRINTING");
     	Line[] lines = new Line[2*n];
     	Random randomGenerator = new Random();
     	//generate n horizontal lines
@@ -21,6 +22,7 @@ public class Main {
     		int endX = startX + randomGenerator.nextInt(maxLen);
     		int y = randomGenerator.nextInt(1000000);
     		lines[i] = new Line(new EndPoint(startX, y), new EndPoint(endX, y), true);
+    		System.out.println(lines[i]);
     	}
     	
     	//generate n vertical lines
@@ -30,6 +32,7 @@ public class Main {
     		int endY = startY - randomGenerator.nextInt(maxLen);
     		int x = randomGenerator.nextInt(1000000);
     		lines[j] = new Line(new EndPoint(x, startY), new EndPoint(x, endY), false);
+    		System.out.println(lines[j]);
     	}
     	
     	return lines;

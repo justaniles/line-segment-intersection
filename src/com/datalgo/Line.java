@@ -22,4 +22,9 @@ public class Line {
 		return isHorizontal;
 	}
 	
+
+	public toString() {
+		return "[ (" + start.x() + " , " + start.y() + "), (" + start.x() + ", " + end.y() + ")]";
+	}
+	
 }
