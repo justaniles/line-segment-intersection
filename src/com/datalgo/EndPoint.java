@@ -1,3 +1,5 @@
+package com.datalgo;
+
 public class EndPoint {
 	private int xCoord;
 	private int yCoord;

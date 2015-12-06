@@ -1,3 +1,5 @@
+package com.datalgo;
+
 public class Line {
 	private EndPoint start;
 	private EndPoint end;
