@@ -10,6 +10,7 @@ public class Main {
     	//blah
     }
     
+    private int upperBound = 1000000;
     
     public Line[] genLines(int n) {
     	System.out.println("PRINTING");
@@ -17,20 +18,20 @@ public class Main {
     	Random randomGenerator = new Random();
     	//generate n horizontal lines
     	for(int i = 0; i < n; i++) {
-    		int startX = randomGenerator.nextInt(1000000);
-    		int maxLen = Math.min(1000000-startX, 25);
+    		int startX = randomGenerator.nextInt(upperBound);
+    		int maxLen = Math.min(upperBound-startX, 25);
     		int endX = startX + randomGenerator.nextInt(maxLen);
-    		int y = randomGenerator.nextInt(1000000);
+    		int y = randomGenerator.nextInt(upperBound);
     		lines[i] = new Line(new EndPoint(startX, y), new EndPoint(endX, y), true);
     		System.out.println(lines[i]);
     	}
     	
     	//generate n vertical lines
     	for(int j = n; j < 2*n; j++) {
-    		int startY = randomGenerator.nextInt(1000000);
+    		int startY = randomGenerator.nextInt(upperBound);
     		int maxLen = Math.min(startY, 25);
     		int endY = startY - randomGenerator.nextInt(maxLen);
-    		int x = randomGenerator.nextInt(1000000);
+    		int x = randomGenerator.nextInt(upperBound);
     		lines[j] = new Line(new EndPoint(x, startY), new EndPoint(x, endY), false);
     		System.out.println(lines[j]);
     	}
