@@ -10,7 +10,7 @@ public class Main {
     	//blah
     }
     
-    private int upperBound = 100;
+    private int upperBound = 1000000;
     
     public Line[] genLines(int n) {
     	System.out.println("PRINTING");

@@ -8,7 +8,7 @@ public class AlgTest {
 	@Test
 	public void test() {
 		Main main = new Main();
-		Line[] lines = main.genLines(10);
+		Line[] lines = main.genLines(200000);
 		main.bruteForce(lines);
 	}
 
