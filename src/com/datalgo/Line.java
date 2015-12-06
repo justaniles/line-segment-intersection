@@ -23,7 +23,7 @@ public class Line {
 	}
 	
 
-	public toString() {
+	public String toString() {
 		return "[ (" + start.x() + " , " + start.y() + "), (" + start.x() + ", " + end.y() + ")]";
 	}
 	
