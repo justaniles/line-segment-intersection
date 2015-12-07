@@ -1,5 +1,4 @@
-// Walt Destler
-// BPTree.java
+package com.datalgo;
 
 import java.util.*;
 import java.io.StringWriter;

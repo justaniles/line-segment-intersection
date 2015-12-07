@@ -7,9 +7,9 @@ import java.util.Random;
  */
 public class GenerateLines {
 
-    private int upperBound = 1000000;
+    private static int upperBound = 1000000;
 
-    public Line[] genLines(int n) {
+    public static Line[] genLines(int n) {
         System.out.println("PRINTING");
         Line[] lines = new Line[2*n];
         Random randomGenerator = new Random();

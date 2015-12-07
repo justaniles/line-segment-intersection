@@ -5,7 +5,7 @@ package com.datalgo;
  */
 public class BruteForce {
 
-    public void bruteForce(Line[] lines) {
+    public static void bruteForce(Line[] lines) {
         for (int i = 0; i < lines.length; i++) {
             for (int j = i; j < lines.length; j++) {
                 if (lines[i].isHoriz() ^ lines[j].isHoriz()) {
