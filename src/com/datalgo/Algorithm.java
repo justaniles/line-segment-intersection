@@ -24,10 +24,10 @@ public class Algorithm {
             // otherwise delete.
             else {
                 if (currentEndPt.equals(parentLine.start())) {
-                    statusLine.insert(currentEndPt.x(), currentEndPt);
+//                    statusLine.insert(currentEndPt.x(), currentEndPt);
                 }
                 else {
-                    statusLine.delete(currentEndPt.x(), currentEndPt);
+//                    statusLine.delete(currentEndPt.x(), currentEndPt);
                 }
             }
         }

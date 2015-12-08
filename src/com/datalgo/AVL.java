@@ -1,3 +1,5 @@
+package com.datalgo;
+
 /**
  * AVL tree implementation in Java
  */
