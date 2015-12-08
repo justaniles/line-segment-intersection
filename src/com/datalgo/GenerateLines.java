@@ -2,9 +2,6 @@ package com.datalgo;
 
 import java.util.Random;
 
-/**
- * Created by justinniles on 12/6/15.
- */
 public class GenerateLines {
 
     private static int upperBound = 1000000;

@@ -2,9 +2,6 @@ package com.datalgo;
 
 import java.io.PrintWriter;
 
-/**
- * Created by justinniles on 12/6/15.
- */
 public class BruteForce {
 
     public static void bruteForce(Line[] lines, PrintWriter out) {
