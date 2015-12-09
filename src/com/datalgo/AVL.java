@@ -235,6 +235,30 @@ public class AVL<Key extends Comparable<? super Key>, Value> {
         root = delete(root, key);
     }
 
+    public void delete(Key k, Value v)
+    {
+        deleteValue(root, new Node(k, v));
+    }
+
+    private Node deleteValue(Node where, Node node)
+    {
+        if (where == null) {
+            return node;
+        }
+
+        int comp = where.key.compareTo(node.key);
+
+        if (comp == 0 && where.list.size() > 1 && where.list.contains(node.list.get(0))) {
+            where.list.remove(node.list.get(0));
+        } else if (comp < 0) {
+            where.left = deleteValue(where.left, node);
+        } else {
+            where.right = deleteValue(where.right, node);
+        }
+
+        return null;
+    }
+
     public Node getRoot() {
         return root;
     }
@@ -261,19 +285,20 @@ public class AVL<Key extends Comparable<? super Key>, Value> {
     public static void main(String[] args) {
         AVL<Integer, Integer> tree = new AVL<>();
 
-    for (int i = 0; i < 10; ++i) {
-      tree.insert(i, i);
-      tree.dump(tree.root, 0);
-      System.out.println("====================");
-    }
+        for (int i = 0; i < 10; ++i) {
+          tree.insert(i, i);
+          tree.dump(tree.root, 0);
+          System.out.println("====================");
+        }
 
-    tree.delete(5);
-    for (int i = 0; i < 10; ++i) {
-      if (i != 5) {
-        tree.delete(i);
-        tree.dump(tree.root, 0);
-        System.out.println("====================");
-      }
-    }
+        tree.delete(5);
+        for (int i = 0; i < 10; ++i) {
+          if (i != 5) {
+            tree.delete(i);
+            tree.dump(tree.root, 0);
+            System.out.println("====================");
+          }
+        }
+
     }
 }
