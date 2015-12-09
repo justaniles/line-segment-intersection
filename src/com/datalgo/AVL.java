@@ -287,18 +287,20 @@ public class AVL<Key extends Comparable<? super Key>, Value> {
         AVL<Integer, Integer> tree = new AVL<>();
 
         for (int i = 0; i < 10; ++i) {
-          tree.insert(i, i);
-          tree.dump(tree.root, 0);
-          System.out.println("====================");
+            tree.insert(i, i);
+            tree.insert(i, i + 20);
+            tree.dump(tree.root, 0);
+            System.out.println("====================");
         }
 
         tree.delete(5);
         for (int i = 0; i < 10; ++i) {
-          if (i != 5) {
-            tree.delete(i);
-            tree.dump(tree.root, 0);
-            System.out.println("====================");
-          }
+            if (i != 5) {
+                tree.delete(i, i);
+                tree.delete(i, i + 20);
+                tree.dump(tree.root, 0);
+                System.out.println("====================");
+            }
         }
 
     }

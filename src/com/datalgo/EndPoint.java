@@ -5,9 +5,10 @@ public class EndPoint {
 	private int yCoord;
     private Line parentLine;
 	
-	public EndPoint(int x, int y) {
+	public EndPoint(int x, int y, Line pl) {
 		xCoord = x;
 		yCoord = y;
+		parentLine = pl;
 	}
 	
 	public int x() {

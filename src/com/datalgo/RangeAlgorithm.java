@@ -21,9 +21,6 @@ public class RangeAlgorithm {
 
         AVL<Integer, EndPoint> statusLine = new AVL<>();
         Line parentLine;
-        int startVal, endVal;
-        AVL.Node curNode;
-        ArrayList<EndPoint> nodeList;
 
         for (EndPoint currentEndPt : endPoints) {
             parentLine = currentEndPt.getParentLine();
@@ -31,17 +28,20 @@ public class RangeAlgorithm {
             // Horizontal line:
             // Perform range search and print out intersecting vertical lines.
             if (parentLine.isHoriz()) {
-                findIntersections(statusLine.getRoot(), parentLine);
+                if (currentEndPt.equals(parentLine.start())) {
+//                    statusLine.dump(statusLine.getRoot(), 0);
+                    findIntersections(statusLine.getRoot(), parentLine);
+                }
             }
             // Vertical line:
             // If this is the starting (top) endpt, add to statusLine,
             // otherwise delete.
             else {
                 if (currentEndPt.equals(parentLine.start())) {
-                    statusLine.insert(currentEndPt.x(), currentEndPt);
+                    statusLine.insert(currentEndPt.x(), parentLine.start());
                 }
                 else {
-                    statusLine.delete(currentEndPt.x(), currentEndPt);
+                    statusLine.delete(currentEndPt.x(), parentLine.start());
                 }
             }
         }
@@ -59,11 +59,11 @@ public class RangeAlgorithm {
 
         if (keyValue < startVal) {
             // Node is to the left of horiz line
-            findIntersections(node.right, horizLine);
+            findIntersections(node.left, horizLine);
         }
         else if (keyValue > endVal) {
             // Node is to the right of horiz line
-            findIntersections(node.left, horizLine);
+            findIntersections(node.right, horizLine);
         }
         else {
             // This node intersects, report all vertical lines at this point
@@ -72,8 +72,10 @@ public class RangeAlgorithm {
                 if (curPoint.getParentLine().isHoriz()) {
                     continue;
                 }
-                reportIntersection(curPoint.getParentLine(), horizLine);
+                reportIntersection(horizLine, curPoint.getParentLine());
             }
+            findIntersections(node.left, horizLine);
+            findIntersections(node.right, horizLine);
         }
     }
 
@@ -98,6 +100,24 @@ class SortVertically implements Comparator<EndPoint> {
             return 1;
         }
         else if (a.y() == b.y()) {
+            Line aLine = a.getParentLine();
+            Line bLine = b.getParentLine();
+            // If a is horiz and b is vertical, or vice versa, order matters
+            if (aLine.isHoriz() ^ bLine.isHoriz()) {
+                if (aLine.isHoriz() && bLine.isStartPoint(b)) {
+                    return 1;
+                }
+                else if (aLine.isHoriz() && !bLine.isStartPoint(b)) {
+                    return -1;
+                }
+                else if (aLine.isStartPoint(b) && bLine.isHoriz()) {
+                    return -1;
+                }
+                else if (!aLine.isStartPoint(b) && bLine.isHoriz()) {
+                    return 1;
+                }
+            }
+
             return 0;
         }
         else {

@@ -6,7 +6,7 @@ public class Line {
 	private Boolean isHorizontal;
 	
 	//assume first and second are in order of increasing x or decreasing y
-	public Line(EndPoint first, EndPoint second, Boolean isHoriz) {
+	public void set(EndPoint first, EndPoint second, Boolean isHoriz) {
 		start = first;
 		end = second;
 		isHorizontal = isHoriz;
@@ -23,6 +23,15 @@ public class Line {
 	public Boolean isHoriz() {
 		return isHorizontal;
 	}
+
+	public boolean isStartPoint(EndPoint ep) {
+        if (ep.equals(start)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 	
 
 	public String toString() {
