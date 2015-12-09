@@ -19,7 +19,7 @@ public class AVL<Key extends Comparable<? super Key>, Value> {
         /**
          * list of values for duplicates
          */
-        private ArrayList<Value> list;
+        private ArrayList<Value> valueList;
 
         /**
          * Left child
@@ -45,14 +45,14 @@ public class AVL<Key extends Comparable<? super Key>, Value> {
          * Creates a new node
          */
         public Node(Key key, Value value) {
-            list = new ArrayList<Value>();
+            valueList = new ArrayList<>();
             this.key = key;
-            this.list.add(value);
+            this.valueList.add(value);
             this.height = 1;
         }
 
         public ArrayList<Value> valueList() {
-            return list;
+            return valueList;
         }
 
         public Key key() {
@@ -156,7 +156,7 @@ public class AVL<Key extends Comparable<? super Key>, Value> {
         int comp = where.key.compareTo(node.key);
 
         if (comp == 0) {
-            where.list.add(node.list.get(0));
+            where.valueList.add(node.valueList.get(0));
         } else if (comp < 0) {
             where.left = insert(where.left, node);
         } else {
@@ -223,11 +223,6 @@ public class AVL<Key extends Comparable<? super Key>, Value> {
         root = insert(root, new Node(key, value));
     }
 
-
-    public ArrayList<Value> getValues(Node node)
-    {
-        return node.list;
-    }
     /**
      * Removes a value from the tree
      */
@@ -237,26 +232,32 @@ public class AVL<Key extends Comparable<? super Key>, Value> {
 
     public void delete(Key k, Value v)
     {
-        deleteValue(root, new Node(k, v));
+        root = deleteValue(root, new Node(k, v));
     }
 
     private Node deleteValue(Node where, Node node)
     {
         if (where == null) {
-            return node;
+            // Node not found
+            throw new IllegalArgumentException();
         }
 
         int comp = where.key.compareTo(node.key);
 
-        if (comp == 0 && where.list.size() > 1 && where.list.contains(node.list.get(0))) {
-            where.list.remove(node.list.get(0));
+        if (comp == 0 && where.valueList.contains(node.valueList.get(0))) {
+            if (where.valueList.size() > 1) {
+                where.valueList.remove(node.valueList.get(0));
+            }
+            else {
+                return delete(where, node.key());
+            }
         } else if (comp < 0) {
             where.left = deleteValue(where.left, node);
         } else {
             where.right = deleteValue(where.right, node);
         }
 
-        return null;
+        return where.balance();
     }
 
     public Node getRoot() {
