@@ -51,6 +51,14 @@ public class AVL<Key extends Comparable<? super Key>, Value> {
             this.height = 1;
         }
 
+        public ArrayList<Value> valueList() {
+            return list;
+        }
+
+        public Key key() {
+            return key;
+        }
+
         /**
          * Right rotation
          */
@@ -225,6 +233,10 @@ public class AVL<Key extends Comparable<? super Key>, Value> {
      */
     public void delete(Key key) {
         root = delete(root, key);
+    }
+
+    public Node getRoot() {
+        return root;
     }
 
     /**
