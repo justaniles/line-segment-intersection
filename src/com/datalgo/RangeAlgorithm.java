@@ -1,21 +1,21 @@
 package com.datalgo;
 
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.LinkedList;
 
 public class RangeAlgorithm {
 
     private EndPoint[] endPoints;
-    private PrintWriter out;
+    private LinkedList<String> intersections;
 
-    public RangeAlgorithm(EndPoint[] endPoints, PrintWriter out) {
+    public RangeAlgorithm(EndPoint[] endPoints) {
         this.endPoints = endPoints;
-        this.out = out;
+        intersections = new LinkedList<>();
     }
 
-    public void run() {
+    public LinkedList<String> run() {
         // Sort endPoints in ascending y-coord
         Arrays.sort(endPoints, new SortVertically());
 
@@ -45,6 +45,8 @@ public class RangeAlgorithm {
                 }
             }
         }
+
+        return intersections;
     }
 
     @SuppressWarnings("unchecked")
@@ -80,7 +82,8 @@ public class RangeAlgorithm {
     }
 
     private void reportIntersection(Line l1, Line l2) {
-        out.println(l1 + " intersects with " + l2);
+        // This fucker is taking a long time for whatever reason:
+        intersections.add(l1 + " intersects with " + l2);
     }
 }
 

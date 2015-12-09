@@ -4,10 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Main {
 
-    private static final boolean EXECUTE_BRUTE_FORCE = true;
+    private static final boolean EXECUTE_BRUTE_FORCE = false;
     private static final boolean EXECUTE_RANGE_ALGORITHM = true;
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
@@ -42,6 +43,7 @@ public class Main {
         // Run range algorithm:
         if (EXECUTE_RANGE_ALGORITHM) {
             RangeAlgorithm algorithm;
+            LinkedList<String> result;
             for(int i = 0; i < nValues.length; i++) {
                 Line[] curLines = lines.get(i);
 
@@ -51,19 +53,24 @@ public class Main {
                     endPoints[2*j] = curLines[j].start();
                     endPoints[2*j+1] = curLines[j].end();
                 }
-                algorithm = new RangeAlgorithm(endPoints, rf);
+                algorithm = new RangeAlgorithm(endPoints);
 
                 System.out.print("n = " + nValues[i] + " - ");
-                rf.println("n = " + nValues[i]);
+                rf.print("n = " + nValues[i] + " - ");
 
                 startTime = System.nanoTime();
-                algorithm.run();
+                result = algorithm.run();
                 endTime = System.nanoTime();
 
                 String elapsed = "Time elapsed: "
                         + (endTime - startTime) / 1000000;
                 System.out.println(elapsed);
                 rf.println(elapsed);
+
+                // Print resulting intersections
+                for (String intersection : result) {
+                    rf.println(intersection);
+                }
             }
         }
 
