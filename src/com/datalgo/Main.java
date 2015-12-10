@@ -8,15 +8,17 @@ import java.util.LinkedList;
 
 public class Main {
 
-    private static final boolean EXECUTE_BRUTE_FORCE = false;
+    private static final boolean EXECUTE_BRUTE_FORCE = true;
     private static final boolean EXECUTE_RANGE_ALGORITHM = true;
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException {
-        int[] nValues = {1, 10, 100, 500, 1000, 2000, 10000, 20000};
+        int[] nValues = {1, 10, 100, 500, 1000, 2000, 10000, 20000, 30000};
+
         ArrayList<Line[]> lines = new ArrayList<>(nValues.length);
         PrintWriter bf = new PrintWriter("brute_force.txt", "UTF-8");
         PrintWriter rf = new PrintWriter("range_algorithm.txt", "UTF-8");
         long startTime, endTime;
+        LinkedList<String> result;
 
         // Generate random lines:
         for (int n : nValues) {
@@ -25,25 +27,29 @@ public class Main {
 
         // Run brute force algorithm:
         if (EXECUTE_BRUTE_FORCE) {
+            writeOut("----Executing Brute Force\n", bf);
             for(int i = 0; i < nValues.length; i++) {
-                System.out.print("n = " + nValues[i] + " - ");
-                bf.println("n = " + nValues[i]);
+                writeOut("n = " + nValues[i] + " - ", bf);
 
                 startTime = System.nanoTime();
-                BruteForce.bruteForce(lines.get(i), bf);
+                result = BruteForce.bruteForce(lines.get(i));
                 endTime = System.nanoTime();
 
-                String elapsed = "Time elapsed: "
-                        + (endTime - startTime) / 1000000;
-                System.out.println(elapsed);
-                bf.println(elapsed);
+                writeOut("Time elapsed: "
+                        + (endTime - startTime) / 1000000
+                        + " (" + result.size() + " intersections)\n", bf);
+
+                // Print resulting intersections
+                for (String intersection : result) {
+                    bf.println(intersection);
+                }
             }
         }
 
         // Run range algorithm:
         if (EXECUTE_RANGE_ALGORITHM) {
+            writeOut("----Executing Range Algorithm\n", rf);
             RangeAlgorithm algorithm;
-            LinkedList<String> result;
             for(int i = 0; i < nValues.length; i++) {
                 Line[] curLines = lines.get(i);
 
@@ -55,17 +61,16 @@ public class Main {
                 }
                 algorithm = new RangeAlgorithm(endPoints);
 
-                System.out.print("n = " + nValues[i] + " - ");
-                rf.print("n = " + nValues[i] + " - ");
+                // Time and execute algorithm
+                writeOut("n = " + nValues[i] + " - ", rf);
 
                 startTime = System.nanoTime();
                 result = algorithm.run();
                 endTime = System.nanoTime();
 
-                String elapsed = "Time elapsed: "
-                        + (endTime - startTime) / 1000000;
-                System.out.println(elapsed);
-                rf.println(elapsed);
+                writeOut("Time elapsed: "
+                        + (endTime - startTime) / 1000000
+                        + " (" + result.size() + " intersections)\n", rf);
 
                 // Print resulting intersections
                 for (String intersection : result) {
@@ -76,6 +81,11 @@ public class Main {
 
         bf.close();
         rf.close();
+    }
+
+    private static void writeOut(String s, PrintWriter pw) {
+        System.out.print(s);
+        pw.print(s);
     }
 
 }
