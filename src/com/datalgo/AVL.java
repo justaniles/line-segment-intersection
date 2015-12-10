@@ -158,9 +158,9 @@ public class AVL<Key extends Comparable<? super Key>, Value> {
         if (comp == 0) {
             where.valueList.add(node.valueList.get(0));
         } else if (comp < 0) {
-            where.left = insert(where.left, node);
-        } else {
             where.right = insert(where.right, node);
+        } else {
+            where.left = insert(where.left, node);
         }
 
         return where.balance();
@@ -196,9 +196,9 @@ public class AVL<Key extends Comparable<? super Key>, Value> {
                 return left.balance();
             }
         } else if (comp < 0) {
-            node.left = delete(node.left, key);
-        } else {
             node.right = delete(node.right, key);
+        } else {
+            node.left = delete(node.left, key);
         }
 
         return node.balance();
@@ -252,9 +252,9 @@ public class AVL<Key extends Comparable<? super Key>, Value> {
                 return delete(where, node.key());
             }
         } else if (comp < 0) {
-            where.left = deleteValue(where.left, node);
-        } else {
             where.right = deleteValue(where.right, node);
+        } else {
+            where.left = deleteValue(where.left, node);
         }
 
         return where.balance();
