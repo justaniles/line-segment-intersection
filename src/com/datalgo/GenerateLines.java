@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class GenerateLines {
 
-    private static int UPPER_BOUND = 100;
-    private static int MAX_LENGTH = 25;
+    private static int UPPER_BOUND = 100000;
+    private static int MAX_LENGTH = 100;
 
     public static Line[] genLines(int n) {
         Line curLine;
