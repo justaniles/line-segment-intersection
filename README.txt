@@ -34,7 +34,4 @@ and range_algorithm.txt, accordingly. It also keeps track of the execution time 
 of n and outputs them to the console. These are the values used to construct our performance graph.
 
 Graph:
-The performance graph for each algorithm is found in datalgo.png. It shows the run times for
-the algorithms when they are not spending time printing the output to files. Thus when the
-program is run in the version submitted, the running time may be a bit slower. This can be 
-changed by commenting out the lines pertaining to printing the output. 
+The performance graph for each algorithm is found in datalgo.png.
