@@ -81,7 +81,6 @@ public class RangeAlgorithm {
     }
 
     private void reportIntersection(Line l1, Line l2) {
-        // This fucker is taking a long time for whatever reason:
         intersections.add(l1 + " intersects with " + l2);
     }
 }
