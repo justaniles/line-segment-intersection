@@ -19,9 +19,9 @@ public class RangeAlgorithm {
         // Sort endPoints in ascending y-coord
         Arrays.sort(endPoints, new SortVertically());
 
-        AVL<Integer, EndPoint> statusLine = new AVL<>();
         Line parentLine;
-
+        AVL<Integer, EndPoint> statusLine = new AVL<>();
+        // Iterate over the endpoints, top to bottom
         for (EndPoint currentEndPt : endPoints) {
             parentLine = currentEndPt.getParentLine();
 
@@ -29,7 +29,6 @@ public class RangeAlgorithm {
             // Perform range search and print out intersecting vertical lines.
             if (parentLine.isHoriz()) {
                 if (currentEndPt.equals(parentLine.start())) {
-//                    statusLine.dump(statusLine.getRoot(), 0);
                     findIntersections(statusLine.getRoot(), parentLine);
                 }
             }
@@ -61,11 +60,11 @@ public class RangeAlgorithm {
 
         if (keyValue < startVal) {
             // Node is to the left of horiz line
-            findIntersections(node.left, horizLine);
+            findIntersections(node.right, horizLine);
         }
         else if (keyValue > endVal) {
             // Node is to the right of horiz line
-            findIntersections(node.right, horizLine);
+            findIntersections(node.left, horizLine);
         }
         else {
             // This node intersects, report all vertical lines at this point
