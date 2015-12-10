@@ -37,7 +37,7 @@ public class Main {
 
                 writeOut("Time elapsed: "
                         + (endTime - startTime) / 1000000
-                        + " (" + result.size() + " intersections)\n", bf);
+                        + "\n", bf);
 
                 // Print resulting intersections
                 for (String intersection : result) {
@@ -70,7 +70,7 @@ public class Main {
 
                 writeOut("Time elapsed: "
                         + (endTime - startTime) / 1000000
-                        + " (" + result.size() + " intersections)\n", rf);
+                        + "\n", rf);
 
                 // Print resulting intersections
                 for (String intersection : result) {

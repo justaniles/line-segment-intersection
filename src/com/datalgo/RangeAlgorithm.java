@@ -91,8 +91,8 @@ class SortVertically implements Comparator<EndPoint> {
      * This function will be used to sort the endPoint array with the largest
      * y-coordinate first. Doing so will enable us to traverse the endPoints
      * in a top-to-bottom manner.
-     * @param a
-     * @param b
+     * @param a Left EndPoint
+     * @param b Right EndPoint
      * @return
      */
     @Override
@@ -105,16 +105,30 @@ class SortVertically implements Comparator<EndPoint> {
             Line bLine = b.getParentLine();
             // If a is horiz and b is vertical, or vice versa, order matters
             if (aLine.isHoriz() ^ bLine.isHoriz()) {
+                // Start point b comes before horizontal line a
                 if (aLine.isHoriz() && bLine.isStartPoint(b)) {
                     return 1;
                 }
+                // Horizontal line a comes before end point b
                 else if (aLine.isHoriz() && !bLine.isStartPoint(b)) {
                     return -1;
                 }
-                else if (aLine.isStartPoint(b) && bLine.isHoriz()) {
+                // Start point a comes before horizontal line b
+                else if (aLine.isStartPoint(a) && bLine.isHoriz()) {
                     return -1;
                 }
-                else if (!aLine.isStartPoint(b) && bLine.isHoriz()) {
+                // Horizontal line b comes before end point a
+                else if (!aLine.isStartPoint(a) && bLine.isHoriz()) {
+                    return 1;
+                }
+            }
+
+            // If a and b are horiz, start points come first
+            if (aLine.isHoriz() && bLine.isHoriz()) {
+                if (aLine.isStartPoint(a)) {
+                    return -1;
+                }
+                else {
                     return 1;
                 }
             }

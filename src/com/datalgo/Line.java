@@ -35,7 +35,7 @@ public class Line {
 	
 
 	public String toString() {
-		return "[(" + start.x() + " , " + start.y() + "), (" + end.x() + ", " + end.y() + ")]";
+		return "[(" + start.x() + ", " + start.y() + "), (" + end.x() + ", " + end.y() + ")]";
 	}
 	
 }
