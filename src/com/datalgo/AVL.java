@@ -3,7 +3,8 @@ package com.datalgo;
 import java.util.ArrayList;
 
 /**
- * AVL tree implementation in Java
+ * AVL tree implementation in Java.
+ * Original Source: https://gist.github.com/nandor/9518116
  */
 public class AVL<Key extends Comparable<? super Key>, Value> {
     /**
